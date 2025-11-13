@@ -14,8 +14,5 @@ def homepage(request):
     }
     return render(request, 'home.html', context_menu)
 
-def detail(request,id):
-    clothes = Clothes.objects.filter(book_id=id)
-    context = {'clothes':clothes}
-    return render(request,'detail.html',context)
+
 # Create your views here.
