@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Clothes Shop</title>
 </head>
 <body>
-  {% for kiyim in clothes %}
-    <h1>{{kiyim.title}}</h1>
-    <p>{{kiyim.desc}}</p>
-  {% endfor %}
+    <h1>Наши товары</h1>
 
+    {% for kiyim in clothes %}
+        <div style="margin-bottom: 20px;">
+            <h2>{{ kiyim.title }}</h2>
+            <p><strong>Цена:</strong> {{ kiyim.price }} сум</p>
+            <p><strong>Описание:</strong> {{ kiyim.desc }}</p>
+            <p><strong>Цвет:</strong> {{ kiyim.color }}</p>
+            <p><strong>Размер:</strong> {{ kiyim.size }}</p>
+
+            {% if kiyim.images %}
+                <img src="{{ kiyim.images.url }}" alt="{{ kiyim.title }}" width="200">
+            {% endif %}
+        </div>
+    {% endfor %}
 </body>
 </html>
