@@ -3,23 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clothes Shop</title>
+    <title>Магазин одежды</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f8f8;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        input[type="text"] {
+            padding: 8px 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        button {
+            padding: 8px 15px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .item {
+            background: white;
+            padding: 15px;
+            margin: 10px auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+        img {
+            width: 100%;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body>
     <h1>Наши товары</h1>
 
-    {% for kiyim in clothes %}
-        <div style="margin-bottom: 20px;">
-            <h2>{{ kiyim.title }}</h2>
-            <p><strong>Цена:</strong> {{ kiyim.price }} сум</p>
-            <p><strong>Описание:</strong> {{ kiyim.desc }}</p>
-            <p><strong>Цвет:</strong> {{ kiyim.color }}</p>
-            <p><strong>Размер:</strong> {{ kiyim.size }}</p>
+    <form method="get" action="">
+        <input type="text" name="q" placeholder="Поиск по названию..." value="{{ query|default:'' }}">
+        <button type="submit">🔍 Искать</button>
+    </form>
 
-            {% if kiyim.images %}
-                <img src="{{ kiyim.images.url }}" alt="{{ kiyim.title }}" width="200">
-            {% endif %}
-        </div>
-    {% endfor %}
+    {% if clothes %}
+        {% for kiyim in clothes %}
+            <div class="item">
+                <h2>{{ kiyim.title }}</h2>
+                <p><strong>Цена:</strong> {{ kiyim.price }} сум</p>
+                <p><strong>Описание:</strong> {{ kiyim.desc }}</p>
+                <p><strong>Цвет:</strong> {{ kiyim.color }}</p>
+                <p><strong>Размер:</strong> {{ kiyim.size }}</p>
+                {% if kiyim.images %}
+                    <img src="{{ kiyim.images.url }}" alt="{{ kiyim.title }}">
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p style="text-align:center;">Ничего не найдено </p>
+    {% endif %}
 </body>
 </html>
